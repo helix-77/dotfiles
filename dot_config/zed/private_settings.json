@@ -52,19 +52,51 @@
   "colorize_brackets": true,
   "relative_line_numbers": "disabled",
   "agent": {
+    "default_profile": "write",
+    "tool_permissions": {
+      "tools": {
+        "create_directory": {
+          "default": "allow"
+        },
+        "terminal": {
+          "default": "allow"
+        }
+      }
+    },
     "play_sound_when_agent_done": "always",
     "sidebar_side": "right",
     "dock": "right",
     "default_model": {
-      "provider": "freellmapi",
-      "model": "auto",
-      "enable_thinking": false,
+      "provider": "openrouter",
+      "model": "google/gemma-4-31b-it:free",
+      "enable_thinking": true,
     },
     "favorite_models": [],
     "model_parameters": [],
   },
   "language_models": {
     "openai_compatible": {
+      "agent-router": {
+        "api_url": "https://agentrouter.org/v1",
+        "available_models": [
+          {
+            "name": "gpt-5.6-sol",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "reasoning_effort": "high",
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": true,
+              "chat_completions": true,
+              "interleaved_reasoning": true,
+              "max_tokens_parameter": false
+            }
+          }
+        ]
+      },
       "freellmapi": {
         "api_url": "http://localhost:3001/v1",
         "available_models": [
@@ -90,7 +122,19 @@
     "trust_all_worktrees": true,
   },
   "agent_servers": {
+    "cline": {
+      "type": "registry"
+    },
+    "antigravity-acp": {
+      "default_config_options": {
+        "mode": "auto_edit"
+      },
+      "type": "registry"
+    },
     "github-copilot-cli": {
+      "default_config_options": {
+        "allow_all": "on"
+      },
       "type": "registry",
     },
     "opencode": {
@@ -103,7 +147,7 @@
       },
       "default_config_options": {
         "effort": "high",
-        "model": "opencode/mimo-v2.5-free",
+        "model": "agentrouter/gpt-5.6-sol",
       },
       "type": "registry",
     },
